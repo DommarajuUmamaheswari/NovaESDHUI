@@ -13,17 +13,19 @@ import GetToken from "./apiCall";
         document.addEventListener("click", (ev) => {
             console.log("---------doc click event -----");
             if (ev.target && ev.target.hasAttribute("data-logic-btn") && (ev.target.type === "button" || ev.target.type === "submit")) {
+                const docId = ev.target.getAttribute("data-logic-docId")
                 //alert("button click");
-                _api("me/drive/root/children", {})
+                _api("controller/users", {})
                 .then(response => {
-                    let doc = response.data.value[0].webUrl;
+                   // const docId = ev.target.getAttribute("data-logic-docId")
+                    let doc = JSON.parse(response.data)[docId].webUrl;
                     if (doc) {
                         window.open(doc, "logic document", 'titlebar = no, toolbar = no, location = no, status = no, menubar = no');
                     }  
 //                 GetToken().then(response => {
-// return response.json();
-                })
-                // })
+//  return response.json();
+                //})
+                  })
                  .catch(error => alert(JSON.stringify(error)));
                 console.log("---------event fired------");
                 
