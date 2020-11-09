@@ -1,32 +1,38 @@
 import _api from "./apiCall";
-import _config from "../dist/config";
-import GetToken from "./apiCall";
- 
+import _config from "../public/config";
+
 (function () {
     console.log("-----Lib-init------");
- 
+
     window.addEventListener("load", () => {
-        // _api("me/drive/root/children", {}).then(response => alert('OK')).catch(error => alert(error.toString()));
     }, false);
     window.addEventListener("load", () => {
         console.log("------Win Load-----");
         document.addEventListener("click", (ev) => {
             console.log("---------doc click event -----");
             if (ev.target && ev.target.hasAttribute("data-logic-btn") && (ev.target.type === "button" || ev.target.type === "submit")) {
-                //alert("button click");
-                _api("me/drive/root/children", {})
-                .then(response => {
-                    let doc = response.data.value[0].webUrl;
-                    if (doc) {
-                        window.open(doc, "logic document", 'titlebar = no, toolbar = no, location = no, status = no, menubar = no');
-                    }  
-//                 GetToken().then(response => {
-// return response.json();
-                })
-                // })
-                 .catch(error => alert(JSON.stringify(error)));
+                const docId = ev.target.getAttribute("data-logic-docId");
+                const docMode = ev.target.getAttribute("data-logic-mode");
+
+                _api("controller/users", {})
+                    .then(response => {
+                        let doc = JSON.parse(response.data)[docId];
+                        if (doc) {
+                            if (docMode === "edit") {
+                                window.open(doc.webUrl, "logic document", 'titlebar = no, toolbar = no, location = no, status = no, menubar = no');
+                            } else if (docMode === "download") {
+                                var link = document.createElement("a");
+                                link.download = doc.name;
+                                link.href = doc.downloadUrl;
+                                document.body.appendChild(link);
+                                link.click();
+                                document.body.removeChild(link);
+                            }
+                        }
+                    })
+                    .catch(error => alert(JSON.stringify(error)));
                 console.log("---------event fired------");
-                
+
             }
         });
     }, false);

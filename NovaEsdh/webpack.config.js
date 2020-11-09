@@ -4,7 +4,7 @@ var path = require('path');
 module.exports = {
     mode: 'development',
     devServer: { 
-        port: 1234, 
-        contentBase: path.join(__dirname, "dist") 
+        port: 5001, 
+        contentBase: path.join(__dirname, "public") 
     }
 }
