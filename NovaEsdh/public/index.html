@@ -1,3 +1,5 @@
+<!-- import _config from "./config.js"; -->
+
 <!DOCTYPE html>
 
 <html>
@@ -80,6 +82,49 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
+        .modal {
+    z-index: 3;
+    display: none;
+    padding-top: 100px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+    margin: auto;
+    background-color: #fff;
+    position: relative;
+    padding: 0;
+    outline: 0;
+    width: 300px;
+    animation: animatezoom 0.6s;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+}
+.authorize-button {
+    cursor: pointer;
+    white-space: nowrap;
+    color: black;
+    right: 10px;
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+}
+.container {
+  padding: 16px;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -91,8 +136,43 @@
             Nova ESDH POC
 
         </h1>
+        <button onclick="document.getElementById('id01').style.display='block'" class="authorize-button ">Login</button>
+       
+       
+
+<div id="id01" class="modal">
+    <div class="modal-content" style="max-width:600px">
+
+      <form class="form" >
+        <div class="section">
+             /* <!-- <h2>Authorize</h2>  --> */
+          /* <!-- <label><b>Enter Bearer token</b></label>
+          <textarea class="textarea" type="text" placeholder="Enter Bearer token" name="token" required></textarea> --> */
+          <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="myInput" name="uname" required>
+            <label for="psw"><b>Password</b></label>
+<input type="password" placeholder="Enter Password"  id="myPassword" name="psw" required>
+          <button onclick="Login()" type="button" class="form-button" id="login">Login</button>
+          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="form-button">Cancel</button>
+          
+          </div>
+        </div>
+      </form>
+
+    </div>
+  </div>
 
     </header>
+    <!-- <script>
+        function getInputValue(){
+            // Selecting the input element and get its value 
+            var inputVal = document.getElementById("myInput").value;
+            
+            // Displaying the value
+            alert(inputVal);
+        }
+    </script> -->
     <div style.margin-top='75px'>
         <section>
             <article>
