@@ -136,7 +136,9 @@ input[type=text], input[type=password] {
             Nova ESDH POC
 
         </h1>
-        <button onclick="document.getElementById('id01').style.display='block'" class="authorize-button ">Login</button>
+        <button onclick="document.getElementById('id01').style.display='block'" id="domma" class="authorize-button ">Login</button>
+        <button style="display:none" id="logout" class="authorize-button ">Logout</button>
+        <label id="loginname" class="authorize-button " ><b>Username</b></label>
        
        
 
@@ -145,12 +147,12 @@ input[type=text], input[type=password] {
 
       <form class="form" >
         <div class="section">
-             /* <!-- <h2>Authorize</h2>  --> */
+             /* <!-- <h2>Authorize</h2>  --> *
           /* <!-- <label><b>Enter Bearer token</b></label>
           <textarea class="textarea" type="text" placeholder="Enter Bearer token" name="token" required></textarea> --> */
           <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" id="myInput" name="uname" required>
+            <input type="text" placeholder="Enter Username" id="myUserName" name="uname" required>
             <label for="psw"><b>Password</b></label>
 <input type="password" placeholder="Enter Password"  id="myPassword" name="psw" required>
           <button onclick="Login()" type="button" class="form-button" id="login">Login</button>

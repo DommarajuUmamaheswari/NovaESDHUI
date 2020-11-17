@@ -27,29 +27,30 @@ import _config from "../public/config";
     window.addEventListener("load", () => {
         debugger;
         document.getElementById("login").onclick =  (ev) => {
-            var input = document.getElementById("myInput").value;
+            var userName = document.getElementById("myUserName").value;
             var password = document.getElementById("myPassword").value;
-            //alert(input);
-            if(!input || !password){
-                alert( "UserName or passwordcannot be null");
+            alert(userName);
+            if(!userName){
+                alert( "Please eneter UserName");
+                return;
             }
-            // else if(!password){
-            //     alert("Password cannot be null");
-            // }
-            // else if(!input && !password){
-            // alert("UserName and Password cannot be null")
-            // }
-            // int flag =0;
-    //         for(i=0; i< _config.userMapping.length; i++)
-    //         {
-    //             if(input == _config.userMapping[i]){
-    //                 Console.WriteLine(_config.userMapping[i]);
-    //                 flag=1; 
-    //             }
-    //         }
-    //         if(flag==0){
-    //     Console.WriteLine("error");
-    //   }
+            if(!password){
+                alert("please eneter Password");
+                return;
+            }
+            _api(`api/Token/tokenforuser?userName=${userName}&password=${password}`, {})
+            .then(response => {
+if(response.status === 200){
+    document.getElementById("loginname").innerHTML = userName;
+    document.getElementById("domma").style.display = "none";
+    document.getElementById("logout").style.display = "block";
+    alert(userName);
+    return userName;
+}
+            })
+            .catch(error =>
+                {   })
+   
         }
     }, false);
     window.addEventListener("load", () => {
