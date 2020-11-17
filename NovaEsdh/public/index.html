@@ -114,6 +114,15 @@
     top: 50%;
     position: absolute;
 }
+.user-name {
+    cursor: pointer;
+    white-space: nowrap;
+    color: white;
+    left: 10px;
+    transform: translateY(-50%);
+    top: 50%;
+    position: absolute;
+}
 .container {
   padding: 16px;
 }
@@ -132,50 +141,34 @@ input[type=text], input[type=password] {
 <body>
     <header>
         <h1>
-
             Nova ESDH POC
-
         </h1>
-        <button onclick="document.getElementById('id01').style.display='block'" id="domma" class="authorize-button ">Login</button>
-        <button style="display:none" id="logout" class="authorize-button ">Logout</button>
-        <label id="loginname" class="authorize-button " ><b>Username</b></label>
-       
-       
-
-<div id="id01" class="modal">
-    <div class="modal-content" style="max-width:600px">
-
-      <form class="form" >
-        <div class="section">
-             /* <!-- <h2>Authorize</h2>  --> *
-          /* <!-- <label><b>Enter Bearer token</b></label>
-          <textarea class="textarea" type="text" placeholder="Enter Bearer token" name="token" required></textarea> --> */
-          <div class="container">
-            <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" id="myUserName" name="uname" required>
-            <label for="psw"><b>Password</b></label>
-<input type="password" placeholder="Enter Password"  id="myPassword" name="psw" required>
-          <button onclick="Login()" type="button" class="form-button" id="login">Login</button>
-          <button onclick="document.getElementById('id01').style.display='none'" type="button" class="form-button">Cancel</button>
-          
-          </div>
+        <button id="btnLoginPopup" class="authorize-button ">Login</button>
+        <button id="btnLogout" style="display:none" id="logout" class="authorize-button ">Logout</button>
+        <label id="lblActiveUser" class="authorize-button "></label>
+ 
+        <div id="loginPopup" class="modal">
+            <div class="modal-content" style="max-width:600px">
+ 
+                <form class="form">
+                    <div class="section">
+ 
+                        <div class="container">
+                            <label for="uname"><b>Username</b></label>
+                            <input type="text" placeholder="Enter Username" id="inputUserName" name="uname" required>
+                            <label for="psw"><b>Password</b></label>
+                            <input type="password" placeholder="Enter Password" id="inputPassword" name="psw" required>
+                            <button type="button" class="form-button" id="btnlogin">Login</button>
+                            <button type="button" class="form-button" id="btnCancel">Cancel</button>
+ 
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </form>
-
-    </div>
-  </div>
-
     </header>
-    <!-- <script>
-        function getInputValue(){
-            // Selecting the input element and get its value 
-            var inputVal = document.getElementById("myInput").value;
-            
-            // Displaying the value
-            alert(inputVal);
-        }
-    </script> -->
-    <div style.margin-top='75px'>
+ 
+    <div id="container" style.margin-top='75px'>
         <section>
             <article>
                 <table>
@@ -199,7 +192,7 @@ input[type=text], input[type=password] {
                         <td>Description</td>
                         <td>Document</td>
                         <th><button data-logic-docId="1" data-logic-btn data-logic-mode="edit">View/Edit</button></th>
-
+ 
                         <th><button data-logic-docId="1" data-logic-btn data-logic-mode="download">Download</button>
                         </th>
                     </tr>
@@ -207,11 +200,7 @@ input[type=text], input[type=password] {
             </article>
         </section>
     </div>
-
-    <footer>
-        KMD
-    </footer>
-
+    <footer> KMD </footer>
 </body>
 
 </html>

@@ -23,24 +23,24 @@ const _api = function (url, option) {
     });
 }
  
-const GetToken = () => {
+export const GetToken = () => {
     return new Promise((resolve, reject) => {
-        if (sessionStorage[_config.sessionTokenObj]) {
+        if (sessionStorage[_config.sessionTokenObj] && !!sessionStorage[_config.sessionTokenObj]) {
             let tokenObj = JSON.parse(sessionStorage[_config.sessionTokenObj]);
-            // let expDate = new Date(tokenObj.expiresOn);
-            // expDate.setMinutes(expDate.getMinutes() - 5);
-            // if (expDate > (new Date())) {
+            let expDate = new Date(tokenObj.expiresOn);
+            expDate.setMinutes(expDate.getMinutes() - 5);
+            if (expDate > (new Date())) {
                 resolve(tokenObj);
                 return tokenObj;
-            // }
+            }
         } else if (_config.token && _config.token.trim() !== "") {
             resolve({ "accessToken": _config.token });
             return ({ "accessToken": _config.token });
         }
-        FetchApi(_config.tokenEndPoint, {})
+        FetchApi(`${_config.tokenEndPoint}${sessionStorage["activeUser"]}`, {})
             .then(response => {
-                sessionStorage[_config.sessionTokenObj] = JSON.stringify({ "accessToken":response["data"]});
-                resolve({ "accessToken":response["data"]});
+                sessionStorage[_config.sessionTokenObj] = JSON.stringify(response["data"]);
+                resolve(response["data"]);
             }).catch(error => {
                 reject(error);
                 return error;

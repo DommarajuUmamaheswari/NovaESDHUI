@@ -1,23 +1,7 @@
-import _api from "./apiCall";
+import _api,{GetToken} from "./apiCall";
 import _config from "../public/config";
 
-    // function Login(){
-    //     var i;
-    //     userName= "Raju";
-    //     for (i=0; i< _config.userMapping.length; i++){
-            
-    //         if(userName == _config.userMapping[i].userName ){
-    //             // return _config.userMapping[i].userName;
-                
-    //             continue;
-    //         }
-    //         else{
-    //             return "Error";
-    //         }
-    //     }
-    //    return userName;
-    // // foreach(int i in _config.userMapping)
-    //  }
+   
  
     var activeUser = null;
 
@@ -25,32 +9,77 @@ import _config from "../public/config";
     console.log("-----Lib-init------");
    
     window.addEventListener("load", () => {
-        debugger;
-        document.getElementById("login").onclick =  (ev) => {
-            var userName = document.getElementById("myUserName").value;
-            var password = document.getElementById("myPassword").value;
+ 
+        let resetLogin = function () {
+            document.getElementById("container").style.display = "none";
+            document.getElementById("lblActiveUser").innerHTML = "";
+            document.getElementById("lblActiveUser").style.display = "none";
+            document.getElementById("inputUserName").value = "";
+            document.getElementById("inputPassword").value = "";
+        }
+        resetLogin();
+ 
+        document.getElementById("btnLoginPopup").onclick = (ev) => {
+            resetLogin();
+            document.getElementById('loginPopup').style.display = 'block';
+        };
+ 
+        document.getElementById("btnCancel").onclick = (ev) => {
+            resetLogin();
+            document.getElementById('loginPopup').style.display = 'none';
+        };
+ 
+        document.getElementById("btnLogout").onclick = (ev) => {
+            resetLogin();
+            document.getElementById("btnlogin").style.display = "block";
+            document.getElementById("btnLogout").style.display = "none";
+            sessionStorage[_config.sessionTokenObj] = '';
+            sessionStorage["activeUser"] = '';
+        };
+ 
+        document.getElementById("btnlogin").onclick = (ev) => {
+            var userName = document.getElementById("inputUserName").value;
+            var password = document.getElementById("inputPassword").value;
+ 
             alert(userName);
-            if(!userName){
-                alert( "Please eneter UserName");
+            if (!userName || !(userName.trim())) {
+                alert("Please eneter UserName");
                 return;
             }
-            if(!password){
+            if (!password || !(password.trim())) {
                 alert("please eneter Password");
                 return;
             }
-            _api(`api/Token/tokenforuser?userName=${userName}&password=${password}`, {})
-            .then(response => {
-if(response.status === 200){
-    document.getElementById("loginname").innerHTML = userName;
-    document.getElementById("domma").style.display = "none";
-    document.getElementById("logout").style.display = "block";
-    alert(userName);
-    return userName;
-}
-            })
-            .catch(error =>
-                {   })
-   
+            sessionStorage["activeUser"] = `userName=${userName}&password=${password}`;
+            GetToken().then(response => {
+                document.getElementById('loginPopup').style.display = "none";
+                document.getElementById("lblActiveUser").innerHTML = `<b>${userName}</>b`;
+                document.getElementById("lblActiveUser").style.display = "block";
+                document.getElementById("btnlogin").style.display = "none";
+                document.getElementById("btnLogout").style.display = "block";
+                document.getElementById("container").style.display = "block";
+            }).catch(error => {
+                alert(error);
+                return;
+            });
+ 
+            // _api(`api/Token/tokenforuser?userName=${userName}&password=${password}`, {})
+            //     .then(response => {
+            //         if (response.status === 200) {
+ 
+            //             document.getElementById('loginPopup').style.display = 'none';
+            //             document.getElementById("lblActiveUser").innerHTML = `<b>${userName}</>b`;
+            //             document.getElementById("btnlogin").style.display = "none";
+            //             document.getElementById("btnLogout").style.display = "block";
+ 
+            //             return userName;
+            //         }
+            //     })
+            //     .catch(error => {
+            //         alert(error);
+            //         return;
+            //     })
+ 
         }
     }, false);
     window.addEventListener("load", () => {
