@@ -1,5 +1,5 @@
 const _config = {
-    baseUrl: "https://localhost:44389",
+    baseUrl: "https://localhost:44330",
     tokenEndPoint:"https://localhost:44389/api/Token/tokenforuser?",
     sessionTokenObj: "logic-token",
     token: "" ,

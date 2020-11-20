@@ -3,7 +3,8 @@ import _config from "../public/config";
 const _api = function (url, option) {
     return new Promise((resolve, reject) => {
         GetToken().then(response => {
-            let headers = { Authorization: `Bearer ${response.accessToken}` };
+            let headers = { Authorization: `Bearer ${response.accessToken}`, 
+            Origin: "http://localhost:5001"};
             let _option = { headers };
             if (option) {
                 _option = { ..._option, ...option };
@@ -39,7 +40,7 @@ export const GetToken = () => {
         }
         FetchApi(`${_config.tokenEndPoint}${sessionStorage["activeUser"]}`, {})
             .then(response => {
-                sessionStorage[_config.sessionTokenObj] = JSON.stringify(response["data"]);
+                sessionStorage[_config.sessionTokenObj] = (response["data"]);
                 resolve(response["data"]);
             }).catch(error => {
                 reject(error);

@@ -118,13 +118,26 @@
     cursor: pointer;
     white-space: nowrap;
     color: white;
-    left: 10px;
-    transform: translateY(-50%);
-    top: 50%;
+    right: 10px;
+    top: 70%;
     position: absolute;
 }
 .container {
   padding: 16px;
+}
+.login-button{
+    /* position: absolute; */
+    display: inline-block;
+    align-items: flex-start;
+    padding: 1px 6px;
+     position: absolute; 
+}
+.cancel-button{
+    display: inline-block;
+    align-items: flex-start;
+    padding: 1px 6px;
+    margin-left: 50px;
+    /* position: absolute; */
 }
 input[type=text], input[type=password] {
     width: 100%;
@@ -134,6 +147,7 @@ input[type=text], input[type=password] {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
+
     </style>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
@@ -145,7 +159,7 @@ input[type=text], input[type=password] {
         </h1>
         <button id="btnLoginPopup" class="authorize-button ">Login</button>
         <button id="btnLogout" style="display:none" id="logout" class="authorize-button ">Logout</button>
-        <label id="lblActiveUser" class="authorize-button "></label>
+        <label id="lblActiveUser" class="user-name"></label>
  
         <div id="loginPopup" class="modal">
             <div class="modal-content" style="max-width:600px">
@@ -158,8 +172,8 @@ input[type=text], input[type=password] {
                             <input type="text" placeholder="Enter Username" id="inputUserName" name="uname" required>
                             <label for="psw"><b>Password</b></label>
                             <input type="password" placeholder="Enter Password" id="inputPassword" name="psw" required>
-                            <button type="button" class="form-button" id="btnlogin">Login</button>
-                            <button type="button" class="form-button" id="btnCancel">Cancel</button>
+                            <button type="button" class="login-button" id="btnlogin">Login</button>
+                            <button type="button" class="cancel-button" id="btnCancel">Cancel</button>
  
                         </div>
                     </div>

@@ -31,7 +31,7 @@ import _config from "../public/config";
  
         document.getElementById("btnLogout").onclick = (ev) => {
             resetLogin();
-            document.getElementById("btnlogin").style.display = "block";
+            document.getElementById("btnlogin").style.display = "inline-block";
             document.getElementById("btnLogout").style.display = "none";
             sessionStorage[_config.sessionTokenObj] = '';
             sessionStorage["activeUser"] = '';
@@ -43,17 +43,17 @@ import _config from "../public/config";
  
             alert(userName);
             if (!userName || !(userName.trim())) {
-                alert("Please eneter UserName");
+                alert("Please enter UserName");
                 return;
             }
             if (!password || !(password.trim())) {
-                alert("please eneter Password");
+                alert("please enter Password");
                 return;
             }
             sessionStorage["activeUser"] = `userName=${userName}&password=${password}`;
             GetToken().then(response => {
                 document.getElementById('loginPopup').style.display = "none";
-                document.getElementById("lblActiveUser").innerHTML = `<b>${userName}</>b`;
+                document.getElementById("lblActiveUser").innerHTML = `<b>User:${userName}</b>`;
                 document.getElementById("lblActiveUser").style.display = "block";
                 document.getElementById("btnlogin").style.display = "none";
                 document.getElementById("btnLogout").style.display = "block";
@@ -90,7 +90,15 @@ import _config from "../public/config";
                 const docId = ev.target.getAttribute("data-logic-docId");
                 const docMode = ev.target.getAttribute("data-logic-mode");
 
-                _api("controller/users", {})
+                //_api("controller/users", {})
+                let kommune = null;
+                let user=null;
+                if (sessionStorage["activeUser"] && sessionStorage["activeUser"].trim()) { 
+ 
+                    kommune=sessionStorage["activeUser"].split("&")[0].split("=")[1];
+                    user=`${sessionStorage["activeUser"].split("&")[0]}@novaesdhtest.onmicrosoft.com`;
+                }
+                _api(`controller/users/${kommune}?${user}`, {})
                     .then(response => {
                         let doc = JSON.parse(response.data)[docId];
                         if (doc) {
