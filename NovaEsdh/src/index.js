@@ -41,7 +41,6 @@ import _config from "../public/config";
             var userName = document.getElementById("inputUserName").value;
             var password = document.getElementById("inputPassword").value;
  
-            alert(userName);
             if (!userName || !(userName.trim())) {
                 alert("Please enter UserName");
                 return;
@@ -50,7 +49,13 @@ import _config from "../public/config";
                 alert("please enter Password");
                 return;
             }
-            sessionStorage["activeUser"] = `userName=${userName}&password=${password}`;
+            let user=_config.userMapping.filter(x=>x.uiUser===userName && x.uiPassword===password);
+            if(user.length < 1){
+                alert("Invalid username and password");
+                return;
+            }
+ user=user[0];
+            sessionStorage["activeUser"] = `userName=${user.userName}&password=${user.password}`;
             GetToken().then(response => {
                 document.getElementById('loginPopup').style.display = "none";
                 document.getElementById("lblActiveUser").innerHTML = `<b>User:${userName}</b>`;
