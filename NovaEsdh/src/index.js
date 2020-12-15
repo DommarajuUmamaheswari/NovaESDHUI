@@ -103,7 +103,8 @@ import _config from "../public/config";
                     kommune=sessionStorage["activeUser"].split("&")[0].split("=")[1];
                     user=`${sessionStorage["activeUser"].split("&")[0]}@novaesdhtest.onmicrosoft.com`;
                 }
-                _api(`controller/users/${kommune}?${user}`, {})
+                //_api(`controller/users/${kommune}?${user}`, {})
+                _api(`controller/users/sharePoint/${kommune}`, {})
                     .then(response => {
                         let doc = JSON.parse(response.data)[docId];
                         if (doc) {

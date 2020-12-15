@@ -3,11 +3,11 @@ const _config = {
     tokenEndPoint:"https://localhost:44389/api/Token/tokenforuser?",
     sessionTokenObj: "logic-token",
     token: "" ,
-    userMapping:[{userName:"159",password:"Azure123",uiUser:"159",uiPassword:"Azure123"},
-    {userName:"159",password:"Azure123",uiUser:"Micheal",uiPassword:"Azure123"},
+    userMapping:[{userName:"159",password:"Azure123",uiUser:"Domma",uiPassword:"Azure123"},
+    {userName:"159",password:"Azure123",uiUser:"Shrutika",uiPassword:"Azure123"},
    
-    {userName:"189",password:"Azure123",uiUser:"189",uiPassword:"Azure123"},
-    {userName:"189",password:"Azure123",uiUser:"Jatte",uiPassword:"Azure123"}
+    {userName:"189",password:"Azure123",uiUser:"Amit",uiPassword:"Azure123"},
+    {userName:"189",password:"Azure123",uiUser:"Ajay",uiPassword:"Azure123"}
 ]  
 };
  
